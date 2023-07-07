@@ -15,11 +15,10 @@ import java.util.concurrent.TimeUnit;
 public class TaskService {
     private static final Logger log = LogManager.getLogger(TaskService.class);
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private final LinkedTaskQueue<AbstractTask> queue;
+    private final LinkedTaskQueue<AbstractTask> queue= new LinkedTaskQueue<AbstractTask>();
     private final ThreadPoolExecutor executor;
 
-    public TaskService() {
-        this.queue = new LinkedTaskQueue<>();
+    private TaskService() {
         this.executor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, queue, t -> new Thread(t, "jalon-task-pool"));
         this.start();
     }

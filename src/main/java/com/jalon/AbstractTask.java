@@ -9,13 +9,13 @@ import java.util.UUID;
  */
 public abstract class AbstractTask implements Runnable {
     /**
+     * 任务ID
+     */
+    private String taskId;
+    /**
      * 任务类型
      */
     private String taskType;
-    /**
-     * 任务名称
-     */
-    private String taskName;
     /**
      * 错误信息
      */
@@ -38,18 +38,18 @@ public abstract class AbstractTask implements Runnable {
     private long taskDuration;
 
     public AbstractTask() {
-        this.taskName = UUID.randomUUID().toString();
+        this.taskId = UUID.randomUUID().toString();
         this.taskType = "default";
         this.taskDuration = 0L;
         this.message = new ArrayList<>();
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getTaskId() {
+        return taskId;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 
     public String getTaskType() {
@@ -96,17 +96,17 @@ public abstract class AbstractTask implements Runnable {
         return message;
     }
 
-   protected void setMessage(String message) {
+    protected void setMessage(String message) {
         this.message.add(message);
     }
 
     @Override
     public String toString() {
         return "{" +
-                "taskType='" + taskType + '\'' +
-                ", taskName='" + taskName + '\'' +
+                "taskId='" + taskId + '\'' +
+                ", taskType='" + taskType + '\'' +
                 ", errorMsg='" + errorMsg + '\'' +
-                ", message=" + message.toString() +
+                ", message=" + message +
                 ", startTime='" + startTime + '\'' +
                 ", endTime='" + endTime + '\'' +
                 ", taskDuration=" + taskDuration +
